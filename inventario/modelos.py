@@ -2,6 +2,7 @@ class Producto:
     """Representa un producto del inventario."""
 
     def __init__(self, codigo, nombre, categoria, precio, stock):
+        """Inicializa un producto con sus datos."""
         self.codigo = codigo
         self.nombre = nombre
         self.categoria = categoria or "General"
@@ -15,6 +16,7 @@ class Producto:
 
     @codigo.setter
     def codigo(self, valor):
+        """Valida y asigna el código del producto."""
         valor = str(valor).strip().upper()
         if len(valor) != 3 or valor[0] != "P" or not valor[1:].isdigit():
             raise ValueError("El código debe tener formato P01, P02, etc.")
@@ -27,6 +29,7 @@ class Producto:
 
     @nombre.setter
     def nombre(self, valor):
+        """Valida y asigna el nombre del producto."""
         valor = str(valor).strip()
         if not valor:
             raise ValueError("El nombre no puede quedar vacío.")
@@ -39,6 +42,7 @@ class Producto:
 
     @categoria.setter
     def categoria(self, valor):
+        """Valida y asigna la categoría del producto."""
         valor = str(valor).strip() or "General"
         self._categoria = valor
 
@@ -49,6 +53,7 @@ class Producto:
 
     @precio.setter
     def precio(self, valor):
+        """Valida y asigna el precio del producto."""
         valor = float(valor)
         if valor < 0:
             raise ValueError("El precio no puede ser negativo.")
@@ -61,6 +66,7 @@ class Producto:
 
     @stock.setter
     def stock(self, valor):
+        """Valida y asigna las unidades disponibles."""
         valor = int(valor)
         if valor < 0:
             raise ValueError("El stock no puede ser negativo.")
