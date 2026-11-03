@@ -1,3 +1,4 @@
+from .excepciones import CodigoInvalidoError, StockInsuficienteError
 class Producto:
     """Representa un producto del inventario."""
 
@@ -19,7 +20,7 @@ class Producto:
         """Valida y asigna el código del producto."""
         valor = str(valor).strip().upper()
         if len(valor) != 3 or valor[0] != "P" or not valor[1:].isdigit():
-            raise ValueError("El código debe tener formato P01, P02, etc.")
+            raise CodigoInvalidoError("El código debe tener formato P01, P02, etc.")
         self._codigo = valor
 
     @property
@@ -85,5 +86,5 @@ class Producto:
         if cantidad <= 0:
             raise ValueError("La cantidad a vender debe ser mayor que cero.")
         if cantidad > self.stock:
-            raise ValueError("No hay suficiente stock para completar la venta.")
+            raise StockInsuficienteError("No hay suficiente stock para completar la venta.")
         self.stock -= cantidad

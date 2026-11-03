@@ -1,4 +1,5 @@
 from .modelos import Producto
+from .excepciones import ProductoNoEncontradoError
 
 
 class Inventario:
@@ -34,7 +35,14 @@ class Inventario:
             if termino in producto.nombre.casefold():
                 return producto
         return None
-
+    def obtener(self, termino):
+        """Devuelve un producto o informa si no se encontró."""
+        producto = self.buscar(termino)
+        if producto is None:
+            mensaje = f"No se encontró el producto: {termino}."
+            raise ProductoNoEncontradoError(mensaje)
+        return producto
+    
     def ordenar(self, criterio="nombre"):
         """Devuelve los productos ordenados por nombre o precio."""
         productos = list(self._productos.values())
