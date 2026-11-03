@@ -1,0 +1,11 @@
+codigo,nombre,categoria,precio,stock
+P01,Laptop HP,Computadora,8000.00,9
+P02,Mouse inalambrico,Accesorio,50.00,25
+P03,Mouse alambrico,Accesorio,40.00,10
+P04,Teclado,Accesorio,100.00,30
+P05,USB 64GB,Accesorio,120.00,3
+P06,Silla gamer,Gamer,2000.00,5
+P07,Audifonos gamer,Gamer,500.00,10
+P08,Impresora Epson,Impresora,2000.00,2
+P10,Teclado mecanico,Accesorio,50.00,10
+P15,Disco Duro 1TB,Accesorio,700.00,2
