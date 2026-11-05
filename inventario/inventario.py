@@ -13,7 +13,11 @@ class Inventario:
     def categorias(self):
         """Devuelve las categorías presentes en el inventario."""
         return {producto.categoria for producto in self._productos.values()}
-
+    @property
+    def ventas(self):
+        """Devuelve las ventas registradas como una tupla."""
+        return tuple(self._ventas)
+    
     def agregar(self, producto: Producto):
         """Agrega un producto; rechaza códigos que ya existen."""
         if producto.codigo in self._productos:
@@ -88,3 +92,4 @@ class Inventario:
     def __repr__(self):
         """Devuelve una representación técnica del inventario."""
         return f"Inventario(productos={len(self)})"
+
