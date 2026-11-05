@@ -1,6 +1,6 @@
-from .modelos import Producto
+from .modelos import Producto, Venta
 from .excepciones import ProductoNoEncontradoError
-
+from datetime import datetime
 
 class Inventario:
     """Administra los productos disponibles en el sistema."""
@@ -8,7 +8,7 @@ class Inventario:
     def __init__(self):
         """Crea un inventario vacío."""
         self._productos = {}
-
+        self._ventas: list[Venta] = []
     @property
     def categorias(self):
         """Devuelve las categorías presentes en el inventario."""
@@ -42,7 +42,22 @@ class Inventario:
             mensaje = f"No se encontró el producto: {termino}."
             raise ProductoNoEncontradoError(mensaje)
         return producto
-    
+    def registrar_venta(self, codigo, cantidad):
+        """Registra una venta y descuenta las unidades del producto."""
+        producto = self.obtener(codigo)
+        cantidad = int(cantidad)
+        producto.descontar_stock(cantidad)
+
+        fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        venta = Venta(
+            fecha,
+            producto.codigo,
+            producto.nombre,
+            cantidad,
+            producto.precio
+        )
+        self._ventas.append(venta)
+        return venta
     def ordenar(self, criterio="nombre"):
         """Devuelve los productos ordenados por nombre o precio."""
         productos = list(self._productos.values())
