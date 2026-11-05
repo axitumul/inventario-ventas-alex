@@ -1,0 +1,23 @@
+graph TD
+    actor Admin as "Administrador / Vendedor"
+
+    subgraph Sistema ["Sistema de Inventario — Tecnología Alex"]
+        UC1["1. Agregar Producto"]
+        UC2["2. Buscar Producto"]
+        UC3["3. Registrar Venta"]
+        UC4["4. Consultar Inventario Ordenado"]
+        UC5["5. Revisar Alertas de Stock"]
+        UC6["6. Consultar Reporte de Ventas"]
+        UC_ValStock["Validar Stock Disponible"]
+        UC_Alerta["Generar Alerta Stock Mínimo / Agotado"]
+    end
+
+    Admin --> UC1
+    Admin --> UC2
+    Admin --> UC3
+    Admin --> UC4
+    Admin --> UC5
+    Admin --> UC6
+
+    UC3 ..> UC_ValStock : <<include>>
+    UC3 ..> UC_Alerta : <<extend>>

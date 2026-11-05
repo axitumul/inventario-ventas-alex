@@ -1,0 +1,50 @@
+classDiagram
+    class ReglaNegocio {
+        <<abstract>>
+        +aplicar(inventario)* List~Producto~
+    }
+
+    class AlertaStockMinimo {
+        -int _limite
+        +limite: int
+        +aplicar(inventario) List~Producto~
+    }
+
+    class AlertaStockAgotado {
+        +aplicar(inventario) List~Producto~
+    }
+
+    ReglaNegocio <|-- AlertaStockMinimo
+    AlertaStockMinimo <|-- AlertaStockAgotado
+
+    class Producto {
+        -str _codigo
+        -str _nombre
+        -str _categoria
+        -float _precio
+        -int _stock
+        +descontar_stock(cantidad: int) None
+        +__str__() str
+    }
+
+    class Venta {
+        +str fecha
+        +str codigo_producto
+        +str nombre_producto
+        +int cantidad
+        +float precio_unitario
+        +total: float
+    }
+
+    class Inventario {
+        -dict _productos
+        -list _ventas
+        +agregar(producto: Producto) None
+        +buscar(termino: str) Producto
+        +obtener(termino: str) Producto
+        +registrar_venta(codigo: str, cantidad: int) Venta
+        +ordenar(criterio: str) List~Producto~
+    }
+
+    Inventario "1" *-- "0..*" Producto
+    Inventario "1" o-- "0..*" Venta
