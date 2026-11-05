@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from .excepciones import CodigoInvalidoError, StockInsuficienteError
 class Producto:
     """Representa un producto del inventario."""
@@ -88,3 +89,18 @@ class Producto:
         if cantidad > self.stock:
             raise StockInsuficienteError("No hay suficiente stock para completar la venta.")
         self.stock -= cantidad
+
+@dataclass(frozen=True)
+class Venta:
+    """Guarda los datos de una venta sin permitir que se modifiquen."""
+
+    fecha: str
+    codigo_producto: str
+    nombre_producto: str
+    cantidad: int
+    precio_unitario: float
+
+    @property
+    def total(self):
+        """Calcula el total de la venta."""
+        return self.cantidad * self.precio_unitario
